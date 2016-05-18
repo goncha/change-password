@@ -24,20 +24,20 @@ def post_index():
         return index_tpl(username=form('username'), alerts=[('error', msg)])
 
     if form('new-password') != form('confirm-password'):
-        return error("Password doesn't match the confirmation!")
+        return error("确认新密码与新密码不一致!")
 
     if len(form('new-password')) < 8:
-        return error("Password must be at least 8 characters long!")
+        return error("新密码至少8个字符!")
 
     try:
         change_password(form('username'), form('old-password'), form('new-password'))
     except Error as e:
-        print("Unsuccessful attemp to change password for %s: %s" % (form('username'), e))
+        print("无法成功修改密码 %s: %s" % (form('username'), e))
         return error(str(e))
 
-    print("Password successfully changed for: %s" % form('username'))
+    print("成功修改密码: %s" % form('username'))
 
-    return index_tpl(alerts=[('success', "Password has been changed")])
+    return index_tpl(alerts=[('success', "成功修改密码")])
 
 
 @route('/static/<filename>', name='static')
@@ -63,7 +63,7 @@ def change_password(*args):
             change_password_ldap(*args)
 
     except (LDAPBindError, LDAPInvalidCredentialsResult, LDAPUserNameIsMandatoryError):
-        raise Error('Username or password is incorrect!')
+        raise Error('用户名或旧密码不正确!')
 
     except LDAPConstraintViolationResult as e:
         # Extract useful part of the error message (for Samba 4 / AD).
