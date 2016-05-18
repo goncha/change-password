@@ -32,11 +32,10 @@ def post_index():
     try:
         change_password(form('username'), form('old-password'), form('new-password'))
     except Error as e:
-        print("无法成功修改密码 %s: %s" % (form('username'), e))
+        #print("无法成功修改密码 %s: %s" % (form('username'), e))
         return error(str(e))
 
-    print("成功修改密码: %s" % form('username'))
-
+    #print("成功修改密码: %s" % form('username'))
     return index_tpl(alerts=[('success', "成功修改密码")])
 
 
