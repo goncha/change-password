@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
 
-    <title>{{ page_title }}</title>
+    <title>更新 {{ site_name }} 的密码</title>
 
     <link rel="stylesheet" href="{{ url('static', filename='style.css') }}">
   </head>
 
   <body>
     <main>
-      <h1>{{ page_title }}</h1>
+      <h1>更新 {{ site_name }} 的密码</h1>
 
       <form method="post">
         <label for="username">用户名</label>
